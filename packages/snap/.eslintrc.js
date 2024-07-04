@@ -16,6 +16,9 @@ module.exports = {
       rules: {
         '@typescript-eslint/unbound-method': 'off',
         'require-jsdoc': 'off',
+        'no-restricted-globals': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ],

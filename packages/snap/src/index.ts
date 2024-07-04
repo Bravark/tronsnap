@@ -2,6 +2,7 @@ import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
 import { panel, text } from '@metamask/snaps-sdk';
 import getTronAddress from './bip/derive-tron-address';
 import getTronPrivateKey from './bip/get-tron-private-key';
+import { getTrxBalance } from './tronWeb';
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
@@ -37,8 +38,10 @@ export const onRpcRequest: OnRpcRequestHandler = async ({
 
     case 'GenerateTronAddress':
       return await getTronAddress();
-    case 'GetTrxBalance':
-      return 'trx Balance';
+    case 'GetTrxBalance': {
+      const address = (await getTronAddress()) as string;
+      return await getTrxBalance(address);
+    }
     case 'GetBandwidthAndEnergyBalance':
       return 'bandwidth and energy balance';
   }
